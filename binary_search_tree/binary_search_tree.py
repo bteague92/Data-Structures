@@ -64,28 +64,61 @@ class BSTNode:
         if self.right:
             self.right.for_each(cb)
 
-    # Print all the values in order from low to high
-    # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass      
-    # Print the value of every node, starting with the given node,
-    # in an iterative breadth first traversal
+        if node:
+            node.in_order_print(node.left)
+            print(node.value)
+            node.in_order_print(node.right)        
+
     def bft_print(self, node):
-        pass
-    # Print the value of every node, starting with the given node,
-    # in an iterative depth first traversal    
+        breadth_queue = []
+        breadth_queue.append(node) 
+        output_for_tests = ""
+        while breadth_queue != []:
+            node = breadth_queue.pop(0)
+            print(node.value)
+            if node.left:
+                breadth_queue.append(node.left)
+            if node.right:
+                breadth_queue.append(node.right)
+   
     def dft_print(self, node):
-        pass
+        depth_stack = []
+        depth_stack.append(node) 
+
+        while depth_stack != []:
+            node = depth_stack.pop(-1)
+            print(node.value)
+            if node.left:
+                depth_stack.append(node.left)
+            if node.right:
+                depth_stack.append(node.right)
         
         
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
-    # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        depth_stack = []
+        depth_stack.append(node) 
 
-    # Print Post-order recursive DFT
+        while depth_stack != []:
+            node = depth_stack.pop(-1)
+            print(node.value)
+            if node.right:
+                depth_stack.append(node.right)
+            if node.left:
+                depth_stack.append(node.left)
+
     def post_order_dft(self, node):
-        pass
+        depth_stack = []
+        depth_stack.append(node) 
+
+        while depth_stack != []:
+            node = depth_stack.pop(-1)
+            if node.left:
+                self.post_order_dft(node.left)
+            if node.right:
+                self.post_order_dft(node.right)
+            print(node.value)
